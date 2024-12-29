@@ -4,20 +4,41 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>PDF Chapter Extractor</title>
+      <link rel="stylesheet" href="/static/styles.css" />
    </head>
    <body>
-      <h1>Upload a PDF to Extract Chapters</h1>
-      <form method="post" enctype="multipart/form-data">
-         <input type="file" name="file" accept=".pdf" required />
-         <button type="submit">Extract Chapters</button>
-      </form>
-      {% if chapters %}
-      <h2>Extracted Chapters</h2>
-      <ul>
-         {% for chapter in chapters %}
-         <li>{{ chapter }}</li>
-         {% endfor %}
-      </ul>
-      {% endif %}
+      <div class="container">
+         <h1>PDF Chapter Extractor</h1>
+         <p>Drag and drop a PDF file or use the upload button below.</p>
+
+         <!-- Drag-and-drop area -->
+         <div id="drop-area" class="drop-area">
+            <p>Drop your PDF file here</p>
+         </div>
+
+         <!-- Fallback upload form -->
+         <form id="upload-form" method="post" enctype="multipart/form-data">
+            <input
+               id="file-input"
+               type="file"
+               name="file"
+               accept=".pdf"
+               hidden
+            />
+            <button id="upload-btn" type="button">Choose File</button>
+            <button type="submit">Extract Chapters</button>
+         </form>
+
+         {% if chapters %}
+         <h2>Extracted Chapters</h2>
+         <ul>
+            {% for chapter in chapters %}
+            <li>{{ chapter }}</li>
+            {% endfor %}
+         </ul>
+         {% endif %}
+      </div>
+
+      <script src="/static/script.js"></script>
    </body>
 </html>

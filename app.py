@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, send_file
 import os
 import pdfplumber
-import io
 
 app = Flask(__name__)
+
+UPLOAD_FOLDER = "uploads"
+
+# Create the uploads directory if it doesn't exist
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 def extract_chapters(pdf_path):
     chapters = []
@@ -21,7 +26,7 @@ def index():
         uploaded_file = request.files.get("file")
         if uploaded_file and uploaded_file.filename.endswith(".pdf"):
             # Save file temporarily
-            filepath = os.path.join("uploads", uploaded_file.filename)
+            filepath = os.path.join(UPLOAD_FOLDER, uploaded_file.filename)
             uploaded_file.save(filepath)
 
             # Extract chapters
