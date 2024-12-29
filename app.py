@@ -38,4 +38,6 @@ def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    from werkzeug.serving import run_simple
+    run_simple("0.0.0.0", 5000, app)
+    # app.run(debug=True)
